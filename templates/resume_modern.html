@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Modern Resume</title>
+
+<style>
+@page{
+  size:A4;
+  margin:16mm;
+}
+
+body{
+  font-family: {{ data.font }};
+  font-size:11.5px;
+  background:white;
+  margin:0;
+}
+
+.resume{
+  width:100%;
+  border:2px solid #222;
+  padding:0;
+}
+
+.content{
+  padding:22px 28px;
+}
+
+/* ===== HEADER (BROWN BAR) ===== */
+
+.header{
+  background:#3a2b1f;
+  color:white;
+  padding:20px 24px;
+  margin-bottom:12px;
+}
+
+.header h1{
+  font-size:26px;
+  font-weight:800;
+  margin:0 0 4px;
+}
+
+.header p{
+  font-size:12px;
+  color:#e6e6e6;
+}
+
+/* ===== TWO COLUMN ROWS ===== */
+
+.row{
+  display:grid;
+  grid-template-columns: 22% 78%;
+  padding:10px 0;
+  border-bottom:1px solid #aaa;
+}
+/* Short resume → airy */
+.content:has(.row:nth-child(-n+5)) .row{
+  padding:12px 0;
+}
+
+/* Long resume → compress to fit one page */
+.content:has(.row:nth-child(n+8)) .row{
+  padding:6px 0;
+}
+
+.row:last-child{
+  border-bottom:none;
+}
+
+.left{
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#444;
+}
+
+.right{
+  font-size:11.5px;
+}
+
+/* lists */
+
+ul{
+  padding-left:16px;
+  margin:4px 0;
+}
+
+li{
+  margin-bottom:4px;
+}
+
+p{
+  margin:4px 0;
+  white-space:pre-line;
+}
+
+/* avoid page breaks */
+
+.row, ul, li, p{
+  break-inside:avoid;
+}
+
+/* ===== PROFESSIONAL DISCLAIMER ===== */
+
+.row.disclaimer{
+  border-bottom:none;
+  margin-top:16px;
+}
+
+.row.disclaimer .left{
+  font-size:11px;
+  font-weight:700;
+  color:#555;
+  letter-spacing:.6px;
+}
+
+.row.disclaimer .right{
+  font-size:10.8px;
+  color:#666;
+  font-style:italic;
+  line-height:1.45;
+}
+
+/* ================= ATS MODE ================= */
+
+{% if data.ats %}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  color:black;
+}
+
+.resume{
+  border:none;
+}
+
+.header{
+  background:none;
+  color:black;
+  padding:0 0 10px;
+  border-bottom:2px solid #000;
+  margin-bottom:14px;
+}
+
+.header p{
+  color:black;
+}
+
+.row{
+  column-gap:16px;
+  border-bottom:1px solid #aaa;
+}
+
+.left{
+  font-weight:700;
+  letter-spacing:.5px;
+  color:black;
+}
+
+.right{
+  color:black;
+}
+
+/* ATS disclaimer clean */
+
+.row.disclaimer .right{
+  font-style:normal;
+  color:#333;
+}
+
+.row:last-child{
+  border-bottom:none;
+}
+
+{% endif %}
+
+</style>
+</head>
+
+<body>
+
+<div class="resume">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>{{ data.name }}</h1>
+  <p>{{ data.phone }} | {{ data.email }} | {{ data.address }}</p>
+</div>
+
+<div class="content">
+
+{% if data.summary %}
+<div class="row">
+  <div class="left">Summary</div>
+  <div class="right">{{ data.summary }}</div>
+</div>
+{% endif %}
+
+{% if data.skills %}
+<div class="row">
+  <div class="left">Skills</div>
+  <div class="right">
+    <ul>
+    {% for l in data.skills.split('\n') if l.strip() %}
+      <li>{{ l }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if data.languages %}
+<div class="row">
+  <div class="left">Languages</div>
+  <div class="right">
+    <ul>
+    {% for l in data.languages.split('\n') if l.strip() %}
+      <li>{{ l }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if data.experience %}
+<div class="row">
+  <div class="left">Experience</div>
+  <div class="right">
+    <ul>
+    {% for l in data.experience.split('\n') if l.strip() %}
+      <li>{{ l }}</li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+{% if data.education %}
+<div class="row">
+  <div class="left">Education</div>
+  <div class="right">{{ data.education }}</div>
+</div>
+{% endif %}
+
+{% if data.certifications %}
+<div class="row">
+  <div class="left">Certifications</div>
+  <div class="right">{{ data.certifications }}</div>
+</div>
+{% endif %}
+
+{% if data.profiles %}
+<div class="row">
+  <div class="left">Profiles</div>
+  <div class="right">{{ data.profiles }}</div>
+</div>
+{% endif %}
+
+{% if data.hobbies %}
+<div class="row">
+  <div class="left">Hobbies</div>
+  <div class="right">{{ data.hobbies }}</div>
+</div>
+{% endif %}
+
+{% if data.disclaimer %}
+<div class="row disclaimer">
+  <div class="left">Disclaimer</div>
+  <div class="right">{{ data.disclaimer }}</div>
+</div>
+{% endif %}
+
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Builder</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ================= FORM ================= -->
+
+<form class="form-box" id="resumeForm">
+
+<h2>Enter Details</h2>
+
+<label>Full Name</label>
+<input id="name" name="name">
+
+<label>Email</label>
+<input id="email" name="email">
+
+<label>Phone Number</label>
+<input id="phone" name="phone" placeholder="+91 9XXXXXXXXX">
+
+<label>Address</label>
+<input id="address" name="address" placeholder="City, State, Country">
+
+<label>Professional Summary</label>
+<textarea id="summary" name="summary"></textarea>
+
+<label>Skills (one per line)</label>
+<textarea id="skills" name="skills"></textarea>
+
+<label>Languages</label>
+<textarea id="languages" name="languages"></textarea>
+
+<label>Experience</label>
+<textarea id="experience" name="experience"></textarea>
+
+<label>Education</label>
+<textarea id="education" name="education"></textarea>
+
+<label>Certifications</label>
+<textarea id="certifications" name="certifications"></textarea>
+
+<label>Profiles</label>
+<textarea id="profiles" name="profiles"></textarea>
+
+<label>Hobbies (optional)</label>
+<textarea id="hobbies" name="hobbies"></textarea>
+
+<label>Disclaimer (optional)</label>
+<textarea id="disclaimer" name="disclaimer"></textarea>
+
+</form>
+
+<!-- ================= PREVIEW ================= -->
+
+<div class="preview-section">
+
+<div class="preview-header">
+<h2>Select Template</h2>
+<button type="button" id="downloadBtn">Download PDF</button>
+</div>
+
+<!-- ===== TEMPLATE BUTTONS ===== -->
+
+<div class="template-gallery">
+<div class="template-card active" data-template="classic">Classic</div>
+<div class="template-card" data-template="professional">Professional</div>
+<div class="template-card" data-template="modern">Modern</div>
+</div>
+
+<!-- ===== COLOR PICKER ===== -->
+
+<div class="theme-picker">
+<span>Color:</span>
+<button class="theme-btn" data-color="#2f80ed" style="background:#2f80ed"></button>
+<button class="theme-btn" data-color="#27ae60" style="background:#27ae60"></button>
+<button class="theme-btn" data-color="#000" style="background:#000"></button>
+<button class="theme-btn" data-color="#8e44ad" style="background:#8e44ad"></button>
+</div>
+
+<!-- ===== FONT ===== -->
+
+<select id="fontPicker">
+<option value="Arial">Arial</option>
+<option value="Georgia">Georgia</option>
+<option value="Times New Roman">Times</option>
+<option value="Verdana">Verdana</option>
+</select>
+
+<!-- ATS toggle -->
+ <div class="ats-toggle">
+  <span>ATS Friendly Mode (Recommended for job portals)</span>
+
+  <label class="switch">
+    <input type="checkbox" id="atsToggle" name="ats">
+    <span class="slider"></span>
+  </label>
+</div>
+
+
+
+<!-- ===== RIGHT CONTENT ===== -->
+
+<div class="right-content">
+
+<!-- ===== SMART PANEL ===== -->
+
+<div class="smart-panel">
+
+<div class="score-box">
+<h3>📊 Resume Score</h3>
+<div class="score-number" id="resumeScore">0%</div>
+<p id="missingText">Start filling your resume</p>
+</div>
+
+<div class="tips-box">
+<h3>💡 Smart Tips</h3>
+<ul id="tipsList">
+<li>Add your professional summary</li>
+<li>Include at least 5 skills</li>
+<li>Fill experience section</li>
+</ul>
+</div>
+
+</div>
+
+<!-- ===== LIVE PREVIEW ===== -->
+
+<div class="preview-container">
+    <h3 class="preview-title">Live Preview</h3>
+
+
+<div class="preview-box classic" id="resume">
+
+<!-- FLOATING FULLSCREEN BUTTON -->
+<button id="fullscreenBtn" class="fullscreen-float">⛶</button>
+
+<div class="section modern-header" draggable="true">
+
+<h1 id="p-name">Your Name</h1>
+
+<div class="contact-line professional-only">
+<span id="p-phone">+91 9XXXXXXXXX</span> |
+<span id="p-email">your@email.com</span> |
+<span id="p-address">City, State</span>
+</div>
+
+<div class="classic-only">
+<p id="p-email-classic">your@email.com</p>
+<p id="p-phone-classic">+91 9XXXXXXXXX</p>
+<p id="p-address-classic">City, State</p>
+</div>
+
+<p id="p-summary"></p>
+
+</div>
+
+<div class="section" draggable="true">
+<h3>Skills</h3>
+<p id="p-skills"></p>
+</div>
+
+<div class="section" draggable="true">
+<h3>Languages</h3>
+<p id="p-languages"></p>
+</div>
+
+<div class="section" draggable="true">
+<h3>Experience</h3>
+<p id="p-experience"></p>
+</div>
+
+<div class="section" draggable="true">
+<h3>Education</h3>
+<p id="p-education"></p>
+</div>
+
+<div class="section" draggable="true">
+<h3>Certifications</h3>
+<p id="p-certifications"></p>
+</div>
+
+<div class="section" draggable="true">
+<h3>Profiles</h3>
+<p id="p-profiles"></p>
+</div>
+
+<div class="section" id="hobbies-section" style="display:none">
+<h3>Hobbies</h3>
+<p id="p-hobbies"></p>
+</div>
+
+<div class="section disclaimer" id="disclaimer-section" style="display:none">
+<p id="p-disclaimer"></p>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

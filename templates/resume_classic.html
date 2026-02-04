@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Classic Resume</title>
+
+<style>
+@page {
+    size: A4;
+    margin: 18mm;
+}
+
+*{
+    box-sizing: border-box;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+body{
+    font-family: {{ data.font }};
+    font-size: 11.5px;
+    line-height: 1.45;
+    background: white;
+}
+
+/* ===== Resume Frame ===== */
+
+.resume-box{
+    border:2px solid #222;
+    padding:26px 32px;
+}
+
+/* ===== Header ===== */
+
+.header h1{
+    font-size:26px;
+    margin:0 0 4px;
+}
+
+.contact{
+    font-size:12px;
+    color:#333;
+    margin-bottom:12px;
+}
+
+/* ===== Sections ===== */
+
+.section{
+    margin-top:10px;
+}
+/* If resume is short → breathe */
+.resume-box:has(.section:nth-child(-n+5)) .section{
+    margin-top:14px;
+}
+
+/* If resume is long → compress */
+.resume-box:has(.section:nth-child(n+8)) .section{
+    margin-top:6px;
+}
+
+.section:last-child{
+    margin-bottom:0;
+}
+
+.section h3{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    border-bottom:1px solid #c2cdda;
+    padding-bottom:3px;
+    margin-bottom:6px;
+    color: {{ data.color }};
+}
+
+/* ===== Paragraph ===== */
+
+p{
+    margin:2px 0 6px;
+    white-space: pre-line;
+}
+
+/* ===== Professional Disclaimer ===== */
+
+.section.disclaimer p{
+    font-size:11px;
+    color:#555;
+    font-style:italic;
+    line-height:1.45;
+}
+
+/* ===== ATS MODE ===== */
+
+{% if data.ats %}
+body{
+    font-family: Arial, sans-serif;
+}
+
+.resume-box{
+    border:none;
+}
+
+.section h3{
+    border:none;
+    color:black;
+}
+
+.section.disclaimer p{
+    font-style:normal;
+    color:#333;
+}
+{% endif %}
+</style>
+</head>
+
+<body>
+
+<div class="resume-box">
+
+<div class="header">
+    <h1>{{ data.name }}</h1>
+    <div class="contact">
+        {{ data.phone }} | {{ data.email }} | {{ data.address }}
+    </div>
+</div>
+
+{% for sec in sections %}
+
+{% if sec == "summary" and data.summary %}
+<div class="section">
+  <h3>SUMMARY</h3>
+  <p>{{ data.summary }}</p>
+</div>
+{% endif %}
+
+{% if sec == "skills" and data.skills %}
+<div class="section">
+  <h3>SKILLS</h3>
+  <p>{{ data.skills }}</p>
+</div>
+{% endif %}
+
+{% if sec == "languages" and data.languages %}
+<div class="section">
+  <h3>LANGUAGES</h3>
+  <p>{{ data.languages }}</p>
+</div>
+{% endif %}
+
+{% if sec == "experience" and data.experience %}
+<div class="section">
+  <h3>EXPERIENCE</h3>
+  <p>{{ data.experience }}</p>
+</div>
+{% endif %}
+
+{% if sec == "education" and data.education %}
+<div class="section">
+  <h3>EDUCATION</h3>
+  <p>{{ data.education }}</p>
+</div>
+{% endif %}
+
+{% if sec == "certifications" and data.certifications %}
+<div class="section">
+  <h3>CERTIFICATIONS</h3>
+  <p>{{ data.certifications }}</p>
+</div>
+{% endif %}
+
+{% if sec == "profiles" and data.profiles %}
+<div class="section">
+  <h3>PROFILES</h3>
+  <p>{{ data.profiles }}</p>
+</div>
+{% endif %}
+
+{% if sec == "hobbies" and data.hobbies %}
+<div class="section">
+  <h3>HOBBIES</h3>
+  <p>{{ data.hobbies }}</p>
+</div>
+{% endif %}
+
+{% if sec == "disclaimer" and data.disclaimer %}
+<div class="section disclaimer">
+  <h3>DISCLAIMER</h3>
+  <p>{{ data.disclaimer }}</p>
+</div>
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
